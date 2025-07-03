@@ -26,9 +26,6 @@ Use Fetch.ai to deploy a smart agent that monitors repositories, triggers scans,
 ✅ **Audit Trail and Policy Enforcement**  
 Store vulnerability reports securely in Snowflake and protect access via Coral Protocol.
 
-✅ **Multi-language Support (Extensible)**  
-Start with Python, JavaScript, or any language your project requires.
-
 ---
 
 ## 📦 Tech Stack
@@ -39,6 +36,6 @@ Start with Python, JavaScript, or any language your project requires.
 - **Grok API** – Semantic codebase search and retrieval
 - **Snowflake** – Persistent storage for logs and reports
 - **Coral Protocol** – Access control and decentralized auditing
-- **Monaco Editor / VS Code Extension** – User interface
+- **VS Code Extension** – User interface
 
 ---
