@@ -9,13 +9,10 @@ app = FastAPI()
 # Initialize Groq client
 client = Groq(api_key="")
 
-# Request body schema
 class CodeSnippet(BaseModel):
     code: str
 
-# Example code preprocessing function
 def preprocess_code(code):
-    # You can add stripping comments, normalizing whitespace, etc.
     return code.strip()
 
 @app.post("/analyze")
