@@ -27,7 +27,7 @@ async def analyze_code(snippet: CodeSnippet):
         "  \"status\": \"vulnerabilities found\",\n"
         "  \"context\": \"<short description of what the code does>\",\n"
         "  \"report\": \"<description of the vulnerability>\",\n"
-        "  \"suggested_fix\": \"<how to fix it>\",\n"
+        "  \"suggested_fix\": \"<a line-by-line replacement for the vulnerable line. If the fix requires multiple lines, write each one on its own line>\",\n"
         "  \"vulnerable_line\": <line number>,\n"
         "  \"severity\": \"low|medium|high\"\n"
         "}\n\n"
@@ -54,9 +54,11 @@ async def analyze_code(snippet: CodeSnippet):
 
     raw_output = completion.choices[0].message.content
 
+# Try to safely extract the JSON from the raw output
     try:
-        parsed_output = json.loads(raw_output)
-    except json.JSONDecodeError:
+        json_text = re.search(r"\{.*\}", raw_output, re.DOTALL).group(0)
+        parsed_output = json.loads(json_text)
+    except Exception:
         parsed_output = {
             "status": "error",
             "context": None,
@@ -68,6 +70,6 @@ async def analyze_code(snippet: CodeSnippet):
         }
 
     return parsed_output
-
+    
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
